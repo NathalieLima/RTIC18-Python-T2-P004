@@ -73,23 +73,6 @@ class Data:
                 if self.__dia > outraData.__dia:
                     return True
         return False
-    
-	
-	
-	Data (int _dia, int _mes, int _ano) {
-		dia = _dia;
-		mes = _mes;
-		ano = _ano;
-	}
-	string toString() {
-		string ret = "";
-		ret.append(to_string(dia));
-		ret.append("/");
-		ret.append(to_string(mes));
-		ret.append("/");
-		ret.append(to_string(ano));
-		return ret;
-	}
 
 class AnaliseDados(ABC): 
 
