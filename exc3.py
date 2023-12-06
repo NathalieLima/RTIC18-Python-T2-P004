@@ -1,6 +1,7 @@
 # EXERCÍCIO 3
 
-from DataFruta import *
+from exc1 import *
+from exc2 import *
 
 def montarMenu(opcoes):
     opcoes_size = len(opcoes)
@@ -52,13 +53,13 @@ def main():
                 idades.entradaDeDados()
 
             case 5:     # Percorrer nomes e salários
-                nomes.mostraDados()
+                listaNomesSalarios(nomes.lista, salarios.lista)
 
             case 6:     # Calcular reajuste
-                pass
+                reajustaSalario(salarios.lista)
 
             case 7:     # Modificar antes de 2019
-                pass
+                modificaData(datas.lista)
 
             case _:
                 print('Insira um número entre 0 e', opcoes_size)
