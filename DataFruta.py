@@ -1,3 +1,4 @@
+# EXERCÍCIO 1
 
 from abc import ABC, abstractmethod
 
@@ -102,35 +103,87 @@ class ListaNomes(AnaliseDados):
         super().__init__(type("String"))
         self.__lista = []        
 
+    def ordenaLista(self):
+        '''
+        Este método retorna nova lista 
+        a partir da ordenação da atual
+        '''
+        lista = self.__lista
+        lista.sort()
+
+        return lista
+
     def entradaDeDados(self):
         '''
         Este método pergunta ao usuários quantos
         elementos vão existir na lista e depois
         solicita a digitação de cada um deles.
         '''
-        pass
+        flag = False
+        qtde = 0
+
+        while not flag:
+            # Solicitar a quantidade de elementos
+            qtde = int(input("Quantos elementos vão existir na lista? "))
+
+            if qtde > 0:
+                flag = True
+            else:
+                print("Aviso: Entre com um número a partir de 1.")
+
+        # Solicitar cada elemento
+        for i in range(qtde):
+            elemento = input(f'Nome {i + 1}: ').capitalize()
+
+            self.__lista.append(elemento)
 
     def mostraMediana(self):
         '''
         Este método ordena a lista e mostra o
         elemento que está na metade da lista
         '''
-        pass    
+        lista_sorteada = self.ordenaLista()
+        tamanho = len(lista_sorteada)
+        mediana = ""
+        indice_mediana = ""
+        
+        if (tamanho % 2 == 0):
+            indice_mediana = tamanho // 2 - 1
+        else:
+            indice_mediana = tamanho // 2
+
+        # Atribuição da mediana 
+        mediana = lista_sorteada[indice_mediana]
+
+        print('A mediana da lista de nomes é', mediana)    
 
     def mostraMenor(self):
         '''
         Este método retorna o menos elemento da lista
         '''
-        pass
+        menor = min(self.__lista)
+
+        print('O primeiro nome alfabeticamente é:', menor)
 
     def mostraMaior(self):
         '''
         Este método retorna o maior elemento da lista
         '''
-        pass    
+        maior = max(self.__lista)
+
+        print('O último nome alfabeticamente é:', maior)
+
+    def mostraDados(self):
+        '''
+        Este método percorre e mostra os elementos da lista
+        '''
+        print('LISTA DE NOMES')
+
+        for (index, item) in enumerate(self.__lista):
+            print(f'Nome {index + 1}: {item}')
 
     def __str__(self):
-        pass
+        return str(self.__lista)
 	
 class ListaDatas(AnaliseDados):
         
