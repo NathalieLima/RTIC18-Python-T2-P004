@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 
+
 class Data:
     
     def __init__(self, dia = 1, mes = 1, ano = 2000):
@@ -98,10 +99,10 @@ class AnaliseDados(ABC):
         pass
 
 class ListaNomes(AnaliseDados):
-    
+
     def __init__(self):
         super().__init__(type("String"))
-        self.__lista = []        
+        self.__list = []
 
     def ordenaLista(self):
         '''
@@ -186,79 +187,96 @@ class ListaNomes(AnaliseDados):
         return str(self.__lista)
 	
 class ListaDatas(AnaliseDados):
-        
+
     def __init__(self):
-        super().__init__(type(Data))
-        self.__lista = []        
-    
-    def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles
-        '''
-        pass
-    
-    def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
-     
-    def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
-    
-    def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass
-    
+        super().__init__(type(CustomDate))
+        self.__list = []
+
+    def input_data(self):
+        num_elements = int(input("Quantos elementos na lista de datas? "))
+        for _ in range(num_elements):
+            day = int(input("Dia: "))
+            month = int(input("Mês: "))
+            year = int(input("Ano: "))
+            new_date = CustomDate(day, month, year)
+            self.__list.append(new_date)
+
+    def show_median(self):
+        try:
+            sorted_list = sorted(self.__list, key=lambda data: (data.year, data.month, data.day))
+            size = len(sorted_list)
+            if size % 2 == 0:
+                middle1 = sorted_list[size // 2 - 1]
+                middle2 = sorted_list[size // 2]
+                median = f"{middle1} e {middle2}"
+            else:
+                median = sorted_list[size // 2]
+            print("Mediana:", median)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
+
+    def show_minimum(self):
+        try:
+            minimum_date = min(self.__list, key=lambda data: (data.year, data.month, data.day))
+            print("Menor data:", minimum_date)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
+
+    def show_maximum(self):
+        try:
+            maximum_date = max(self.__list, key=lambda data: (data.year, data.month, data.day))
+            print("Maior data:", maximum_date)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
+
     def __str__(self):
-        pass
+        return str(self.__list)
+
 
 class ListaSalarios(AnaliseDados):
 
     def __init__(self):
         super().__init__(type(float))
-        self.__lista = []        
+        self.__list = []
 
-    def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles
-        '''
-        pass
+    def input_data(self):
+        num_elements = int(input("Quantos elementos na lista de salários? "))
+        for _ in range(num_elements):
+            salary = float(input("Salário: "))
+            self.__list.append(salary)
 
-    def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
+    def show_median(self):
+        try:
+            sorted_list = sorted(self.__list)
+            size = len(sorted_list)
+            if size % 2 == 0:
+                median = (float(sorted_list[size // 2 - 1]) + float(sorted_list[size // 2])) / 2
+            else:
+                median = float(sorted_list[size // 2])
+            print("Mediana:", median)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
 
-    def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
+    def show_minimum(self):
+        try:
+            minimum_salary = min(self.__list)
+            print("Menor salário:", minimum_salary)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
 
-    def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass
-    
+    def show_maximum(self):
+        try:
+            maximum_salary = max(self.__list)
+            print("Maior salário:", maximum_salary)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
+
     def __str__(self):
-        pass
+        return str(self.__list)
+
 
 class ListaIdades(AnaliseDados):
-    
+
     def __init__(self):
         super().__init__(type(int))
         self.__lista = []        
@@ -306,6 +324,7 @@ def main():
         print("___________________")
 
     print("Fim do teste!!!")
+
 
 if __name__ == "__main__":
     main()
