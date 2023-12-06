@@ -211,34 +211,31 @@ class ListaIdades(AnaliseDados):
         self.__lista = []        
     
     def entradaDeDados(self):
-        '''
-        Este método pergunta ao usuários quantos
-        elementos vão existir na lista e depois
-        solicita a digitação de cada um deles
-        '''
-        pass
+        ida = int(input("Quantas idades na lista?"))
+        for _ in range(ida):
+            idade = (input("Idade: "))
+            self.__lista.append(idade)
+
     
     def mostraMediana(self):
-        '''
-        Este método ordena a lista e mostra o
-        elemento que está na metade da lista
-        '''
-        pass    
+        sorted_list = sorted(self.__lista)
+        size = len(sorted_list)
+        if size % 2 == 0:
+            median = (sorted_list[size // 2 - 1] + sorted_list[size // 2]) / 2
+        else: 
+            median = sorted_list[size // 2]
+        print("Mediana ", median)
     
     def mostraMenor(self):
-        '''
-        Este método retorna o menos elemento da lista
-        '''
-        pass
+        menor_idade = min(self.__lista)
+        print("Menor idade: ", menor_idade)
     
     def mostraMaior(self):
-        '''
-        Este método retorna o maior elemento da lista
-        '''
-        pass
+        maior_idade = max(self.__lista)
+        print("Maior idade: ", maior_idade)
 
     def __str__(self):
-        pass
+        return str(self.__lista)
 
 def main():
     nomes = ListaNomes()
