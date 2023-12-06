@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class CustomDate:
 
     def __init__(self, day=1, month=1, year=2000):
@@ -74,106 +75,213 @@ class CustomDate:
         return False
 
 
-
-class Data(CustomDate):  # Herda de CustomDate
-    
-    def __str__(self):
-        return "{}/{}/{}".format(self.dia, self.mes, self.ano)
-
-
-class AnaliseDados(ABC): 
+class DataAnalysis(ABC):
 
     @abstractmethod
-    def __init__(self, tipo_de_dados):
-        self.__tipo_de_dados = tipo_de_dados
+    def __init__(self, data_type):
+        self.__data_type = data_type
 
     @abstractmethod
-    def entrada_de_dados(self):
+    def input_data(self):
         pass
 
     @abstractmethod
-    def mostra_mediana(self):
-        pass
-    
-    @abstractmethod
-    def mostra_menor(self):
+    def show_median(self):
         pass
 
     @abstractmethod
-    def mostra_maior(self):
+    def show_minimum(self):
+        pass
+
+    @abstractmethod
+    def show_maximum(self):
         pass
 
 
-class ListaNomes(AnaliseDados):
-    
+class NameList(DataAnalysis):
+
     def __init__(self):
         super().__init__(type("String"))
-        self.__lista = []        
+        self.__list = []
 
-    def entrada_de_dados(self):
-        # Implemente sua lógica para inserir nomes
-        pass
+    def input_data(self):
+        num_elements = int(input("Quantos elementos na lista de nomes? "))
+        for _ in range(num_elements):
+            name = input("Digite um nome: ")
+            self.__list.append(name)
 
-    def mostra_mediana(self):
-        # Implemente sua lógica para exibir a mediana
-        pass    
+    def show_median(self):
+        try:
+            sorted_list = sorted(self.__list)
+            size = len(sorted_list)
+            if size % 2 == 0:
+                middle1 = sorted_list[size // 2 - 1]
+                middle2 = sorted_list[size // 2]
+                median = f"{middle1} e {middle2}"
+            else:
+                median = sorted_list[size // 2]
+            print("Mediana:", median)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de nomes sejam strings.")
 
-    def mostra_menor(self):
-        # Implemente sua lógica para exibir o menor elemento
-        pass
+    def show_minimum(self):
+        print("Menor elemento:", min(self.__list))
 
-    def mostra_maior(self):
-        # Implemente sua lógica para exibir o maior elemento
-        pass    
+    def show_maximum(self):
+        print("Maior elemento:", max(self.__list))
 
     def __str__(self):
-        # Implemente sua lógica para exibir a lista
-        pass
-	
-class ListaDatas(AnaliseDados):
-        
+        return str(self.__list)
+
+
+class DateList(DataAnalysis):
+
     def __init__(self):
-        super().__init__(type(Data))
-        self.__lista = []        
-    
-    def entrada_de_dados(self):
-        # Implemente sua lógica para inserir datas
-        pass
-    
-    def mostra_mediana(self):
-        # Implemente sua lógica para exibir a mediana
-        pass    
-     
-    def mostra_menor(self):
-        # Implemente sua lógica para exibir o menor elemento
-        pass
-    
-    def mostra_maior(self):
-        # Implemente sua lógica para exibir o maior elemento
-        pass
-    
-    def __str__(self):
-        # Implemente sua lógica para exibir a lista
-        pass
+        super().__init__(type(CustomDate))
+        self.__list = []
 
-# Modifique as outras classes de maneira semelhante
+    def input_data(self):
+        num_elements = int(input("Quantos elementos na lista de datas? "))
+        for _ in range(num_elements):
+            day = int(input("Dia: "))
+            month = int(input("Mês: "))
+            year = int(input("Ano: "))
+            new_date = CustomDate(day, month, year)
+            self.__list.append(new_date)
+
+    def show_median(self):
+        try:
+            sorted_list = sorted(self.__list, key=lambda data: (data.year, data.month, data.day))
+            size = len(sorted_list)
+            if size % 2 == 0:
+                middle1 = sorted_list[size // 2 - 1]
+                middle2 = sorted_list[size // 2]
+                median = f"{middle1} e {middle2}"
+            else:
+                median = sorted_list[size // 2]
+            print("Mediana:", median)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
+
+    def show_minimum(self):
+        try:
+            minimum_date = min(self.__list, key=lambda data: (data.year, data.month, data.day))
+            print("Menor data:", minimum_date)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
+
+    def show_maximum(self):
+        try:
+            maximum_date = max(self.__list, key=lambda data: (data.year, data.month, data.day))
+            print("Maior data:", maximum_date)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
+
+    def __str__(self):
+        return str(self.__list)
+
+
+class SalaryList(DataAnalysis):
+
+    def __init__(self):
+        super().__init__(type(float))
+        self.__list = []
+
+    def input_data(self):
+        num_elements = int(input("Quantos elementos na lista de salários? "))
+        for _ in range(num_elements):
+            salary = float(input("Salário: "))
+            self.__list.append(salary)
+
+    def show_median(self):
+        try:
+            sorted_list = sorted(self.__list)
+            size = len(sorted_list)
+            if size % 2 == 0:
+                median = (float(sorted_list[size // 2 - 1]) + float(sorted_list[size // 2])) / 2
+            else:
+                median = float(sorted_list[size // 2])
+            print("Mediana:", median)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
+
+    def show_minimum(self):
+        try:
+            minimum_salary = min(self.__list)
+            print("Menor salário:", minimum_salary)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
+
+    def show_maximum(self):
+        try:
+            maximum_salary = max(self.__list)
+            print("Maior salário:", maximum_salary)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
+
+    def __str__(self):
+        return str(self.__list)
+
+
+class AgeList(DataAnalysis):
+
+    def __init__(self):
+        super().__init__(type(int))
+        self.__list = []
+
+    def input_data(self):
+        num_elements = int(input("Quantos elementos na lista de idades? "))
+        for _ in range(num_elements):
+            age = int(input("Idade: "))
+            self.__list.append(age)
+
+    def show_median(self):
+        try:
+            sorted_list = sorted(self.__list)
+            size = len(sorted_list)
+            if size % 2 == 0:
+                median = (sorted_list[size // 2 - 1] + sorted_list[size // 2]) / 2
+            else:
+                median = sorted_list[size // 2]
+            print("Mediana:", median)
+        except TypeError:
+            print("Erro: Certifique-se de que todos os valores na lista de idades sejam números.")
+
+    def show_minimum(self):
+        try:
+            minimum_age = min(self.__list)
+            print("Menor idade:", minimum_age)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de idades sejam números.")
+
+    def show_maximum(self):
+        try:
+            maximum_age = max(self.__list)
+            print("Maior idade:", maximum_age)
+        except ValueError:
+            print("Erro: Certifique-se de que todos os valores na lista de idades sejam números.")
+
+    def __str__(self):
+        return str(self.__list)
+
 
 def main():
-    nomes = ListaNomes()
-    datas = ListaDatas()
-    salarios = ListaSalarios()
-    idades = ListaIdades()
+    names = NameList()
+    dates = DateList()
+    salaries = SalaryList()
+    ages = AgeList()
 
-    lista_listas = [nomes, datas, salarios, idades]
+    data_lists = [names, dates, salaries, ages]
 
-    for lista in lista_listas:
-        lista.entrada_de_dados()
-        lista.mostra_mediana()
-        lista.mostra_menor()
-        lista.mostra_maior()
+    for data_list in data_lists:
+        data_list.input_data()
+        data_list.show_median()
+        data_list.show_minimum()
+        data_list.show_maximum()
         print("___________________")
 
     print("Fim do teste!!!")
+
 
 if __name__ == "__main__":
     main()
