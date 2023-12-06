@@ -109,23 +109,20 @@ class ListaNomes(AnaliseDados):
         self.__lista = []        
 
     def entradaDeDados(self):
-        # Implement your logic for entering names
         pass
 
     def mostraMediana(self):
-        # Implement your logic for displaying median
         pass    
 
     def mostraMenor(self):
-        # Implement your logic for displaying the smallest element
+
         pass
 
     def mostraMaior(self):
-        # Implement your logic for displaying the largest element
         pass    
 
     def __str__(self):
-        # Implement your logic for displaying the list
+
         pass
 	
 class ListaDatas(AnaliseDados):
@@ -135,26 +132,25 @@ class ListaDatas(AnaliseDados):
         self.__lista = []        
     
     def entradaDeDados(self):
-        # Implement your logic for entering dates
+
         pass
     
     def mostraMediana(self):
-        # Implement your logic for displaying median
+
         pass    
      
     def mostraMenor(self):
-        # Implement your logic for displaying the smallest element
+
         pass
     
     def mostraMaior(self):
-        # Implement your logic for displaying the largest element
+
         pass
     
     def __str__(self):
-        # Implement your logic for displaying the list
+
         pass
 
-# Similarly, modify the other classes accordingly
 
 def main():
     nomes = ListaNomes()
