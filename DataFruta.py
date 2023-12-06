@@ -229,48 +229,66 @@ class ListaDatas(AnaliseDados):
     def __str__(self):
         return str(self.__list)
 
-
 class ListaSalarios(AnaliseDados):
 
     def __init__(self):
         super().__init__(type(float))
-        self.__list = []
+        self.__lista = []        
 
     def entradaDeDados(self):
-        num_elements = int(input("Quantos elementos na lista de salários? "))
-        for _ in range(num_elements):
-            salary = float(input("Salário: "))
-            self.__list.append(salary)
+        '''
+        Este método pergunta ao usuários quantos
+        elementos vão existir na lista e depois
+        solicita a digitação de cada um deles
+        '''
+        qtd_salarios = int(input("Digite o quantidade de salarios: "))
+        for item in range(qtd_salarios):
+            salario = input("Digite salario: ")
+            self.__lista.append(salario)
+            #self.__lista=sorted(self.__lista)
+        return self.__lista
+    #fimdef
 
     def mostraMediana(self):
-        try:
-            sorted_list = sorted(self.__list)
-            size = len(sorted_list)
-            if size % 2 == 0:
-                median = (float(sorted_list[size // 2 - 1]) + float(sorted_list[size // 2])) / 2
-            else:
-                median = float(sorted_list[size // 2])
-            print("Mediana:", median)
-        except ValueError:
-            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
+        '''
+        Este método ordena a lista e mostra o
+        elemento que está na metade da lista
+        '''
+        self.__lista=sorted(self.__lista)
+        compr = len(self.__lista)
+        if compr % 2 == 1:
+            return self.__lista[compr // 2] #arredonda pra baixo
+        else:
+            return (self.__lista[compr / 2]+self.__lista[compr / 2 - 1])/2
+        #fimse
+    #fimdef 
 
     def mostraMenor(self):
-        try:
-            minimum_salary = min(self.__list)
-            print("Menor salário:", minimum_salary)
-        except ValueError:
-            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
+        '''
+        Este método retorna o menos elemento da lista
+        '''
+        self.__lista=sorted(self.__lista)
+        return self.__lista[0]
 
     def mostraMaior(self):
-        try:
-            maximum_salary = max(self.__list)
-            print("Maior salário:", maximum_salary)
-        except ValueError:
-            print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
-
+        '''
+        Este método retorna o maior elemento da lista
+        '''
+        self.__lista=sorted(self.__lista)
+        return (self.__lista[-1])
+    
     def __str__(self):
-        return str(self.__list)
+        '''
+        This method returns a string representation of the object.
+        '''
+        #return f"DataFruta: lista salario={', '.join(self.__lista)}"
+        return ', '.join(self.__lista)
 
+    #fimdef
+    def listarEmOrdem(self):
+        self.__lista=sorted(self.__lista)
+        return str(self)
+    #fimdef
 
 class ListaIdades(AnaliseDados):
 
