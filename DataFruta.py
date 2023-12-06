@@ -2,9 +2,7 @@
 
 from abc import ABC, abstractmethod
 
-
 class Data:
-    
     def __init__(self, dia = 1, mes = 1, ano = 2000):
         if dia < 1 or dia > 31:
             raise ValueError("Dia inválido")
@@ -187,12 +185,11 @@ class ListaNomes(AnaliseDados):
         return str(self.__lista)
 	
 class ListaDatas(AnaliseDados):
-
     def __init__(self):
         super().__init__(type(Data))
         self.__list = []
 
-    def input_data(self):
+    def entradaDeDados(self):
         num_elements = int(input("Quantos elementos na lista de datas? "))
         for _ in range(num_elements):
             day = int(input("Dia: "))
@@ -201,7 +198,7 @@ class ListaDatas(AnaliseDados):
             new_date = Data(day, month, year)
             self.__list.append(new_date)
 
-    def show_median(self):
+    def mostraMediana(self):
         try:
             sorted_list = sorted(self.__list, key=lambda data: (data.year, data.month, data.day))
             size = len(sorted_list)
@@ -215,14 +212,14 @@ class ListaDatas(AnaliseDados):
         except TypeError:
             print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
 
-    def show_minimum(self):
+    def mostraMenor(self):
         try:
             minimum_date = min(self.__list, key=lambda data: (data.year, data.month, data.day))
             print("Menor data:", minimum_date)
         except TypeError:
             print("Erro: Certifique-se de que todos os valores na lista de datas sejam objetos CustomDate.")
 
-    def show_maximum(self):
+    def mostraMaior(self):
         try:
             maximum_date = max(self.__list, key=lambda data: (data.year, data.month, data.day))
             print("Maior data:", maximum_date)
@@ -239,13 +236,13 @@ class ListaSalarios(AnaliseDados):
         super().__init__(type(float))
         self.__list = []
 
-    def input_data(self):
+    def entradaDeDados(self):
         num_elements = int(input("Quantos elementos na lista de salários? "))
         for _ in range(num_elements):
             salary = float(input("Salário: "))
             self.__list.append(salary)
 
-    def show_median(self):
+    def mostraMediana(self):
         try:
             sorted_list = sorted(self.__list)
             size = len(sorted_list)
@@ -257,14 +254,14 @@ class ListaSalarios(AnaliseDados):
         except ValueError:
             print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
 
-    def show_minimum(self):
+    def mostraMenor(self):
         try:
             minimum_salary = min(self.__list)
             print("Menor salário:", minimum_salary)
         except ValueError:
             print("Erro: Certifique-se de que todos os valores na lista de salários sejam números.")
 
-    def show_maximum(self):
+    def mostraMaior(self):
         try:
             maximum_salary = max(self.__list)
             print("Maior salário:", maximum_salary)
