@@ -189,7 +189,7 @@ class ListaNomes(AnaliseDados):
 class ListaDatas(AnaliseDados):
 
     def __init__(self):
-        super().__init__(type(CustomDate))
+        super().__init__(type(Data))
         self.__list = []
 
     def input_data(self):
@@ -198,7 +198,7 @@ class ListaDatas(AnaliseDados):
             day = int(input("Dia: "))
             month = int(input("Mês: "))
             year = int(input("Ano: "))
-            new_date = CustomDate(day, month, year)
+            new_date = Data(day, month, year)
             self.__list.append(new_date)
 
     def show_median(self):
